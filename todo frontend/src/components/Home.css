@@ -16,20 +16,19 @@
     margin-top: 2px;
 }
 
-.checkbox{
+.checkBox{
   display: flex;
   align-items: center;
 }
 
-.checkbox .icon{
-  margin-right: 5px;
-  font-size: 15px;
+.checkBox .icon{
+  margin: 10px;
 }
 
-.task div span{
+.task span{
   margin: 0px 5px 0 px 4px;
 }
 
-.task div .icon{
+.task .icon{
   cursor: pointer;
 }

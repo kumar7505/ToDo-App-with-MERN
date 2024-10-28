@@ -24,10 +24,16 @@ app.get('/get', (req, res) => {
     TodoModel.find()
     .then(result => {
         res.json(result);
-        console.log("KUMAr")
     })
     .catch(err => res.json(err))
-})
+});
+
+app.put('/update/:id', (req, res) => {
+    const {id} = req.params;
+    TodoModel.findByIdAndUpdate({_id: id}, {done: true})
+    .then(result => res.json(result))
+    .catch(err => res.json(err))
+});
 
 app.post('/add', (req, res, next) => {
     const task = req.body.task;
