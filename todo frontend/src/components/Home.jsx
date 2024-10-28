@@ -22,7 +22,7 @@ const Home = () => {
         <h3>No Record</h3>
         :
         todos.map(todo => (
-          <div>
+          <div className='task'>
             {todo.task}
           </div>
         ))
