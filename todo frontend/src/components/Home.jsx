@@ -1,10 +1,18 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import React from 'react'
 import Create from './Create'
 import './Home.css'
+import axios from 'axios';
 
 const Home = () => {
-  const [todos, setTodos] = useState([]);  return (
+  const [todos, setTodos] = useState([]);  
+  useEffect(() => {
+    axios.get('http://localhost:3001/get')
+     .then(result => setTodos(result.data.map(todo => todo.task)))
+     .catch(err => console.log(err))
+  }, []);
+  
+  return (
     <div className='home'>
       <h1>To-Do List</h1>
       <Create />

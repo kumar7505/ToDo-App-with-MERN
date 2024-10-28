@@ -4,8 +4,8 @@ const cors = require('cors');
 const TodoModel = require('./models/Todo.js');
 
 
-PORT = process.env.PORT || 3001;
-Mongo_PORT = process.env.Mongo_PORT || 'mongodb://127.0.0.1:27017/test';
+PORT = process.env.PORT;
+Mongo_PORT = process.env.Mongo_PORT;
 
 const app = express();
 app.use(cors());
@@ -15,13 +15,21 @@ mongoose.connect('mongodb://127.0.0.1:27017/test', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(result => {
-    console.log('Task created:'); // Log the created task
+    console.log('Task connected:'); // Log the created task
 }).catch(err => {
   console.error('MongoDB connection error:', err);
 });
 
+app.get('/get', (req, res) => {
+    TodoModel.find()
+    .then(result => {
+        res.json(result);
+        console.log("KUMAr")
+    })
+    .catch(err => res.json(err))
+})
+
 app.post('/add', (req, res, next) => {
-    console.log('Received request body:', req.body.task); 
     const task = req.body.task;
     TodoModel.create({
         task: task
