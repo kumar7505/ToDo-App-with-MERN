@@ -8,7 +8,7 @@ const Home = () => {
   const [todos, setTodos] = useState([]);  
   useEffect(() => {
     axios.get('http://localhost:3001/get')
-     .then(result => setTodos(result.data.map(todo => todo.task)))
+     .then(result => setTodos(result.data))
      .catch(err => console.log(err))
   }, []);
   
@@ -23,7 +23,7 @@ const Home = () => {
         :
         todos.map(todo => (
           <div>
-            {todo}
+            {todo.task}
           </div>
         ))
       }
