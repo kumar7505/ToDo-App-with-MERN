@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import React from 'react'
 import Create from './Create'
+import './Home.css'
 
 const Home = () => {
   const [todos, setTodos] = useState([]);  return (
