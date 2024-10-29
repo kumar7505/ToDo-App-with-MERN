@@ -30,10 +30,37 @@ app.get('/get', (req, res) => {
 
 app.put('/update/:id', (req, res) => {
     const {id} = req.params;
-    TodoModel.findByIdAndUpdate({_id: id}, {done: true})
-    .then(result => res.json(result))
-    .catch(err => res.json(err))
+    // TodoModel.findByIdAndUpdate({_id: id}, {done: true})
+    // .then(result => res.json(result))
+    // .catch(err => res.json(err))\
+    console.log(78);
+    TodoModel.findById(id)
+    .then(todo => {
+        if (!todo) {
+            return res.json({ message: 'Todo not found' });
+        }
+
+        // Toggle the 'done' status
+        todo.done = !todo.done; // Change the value to its inverse
+
+        // Save the updated Todo item
+        return todo.save();
+    })
+    .then(updatedTodo => res.json(updatedTodo)) // Send the updated Todo back as a response
+    .catch(err => {
+        console.error(err);
+        res.status(500).json(err); // Handle any errors
+    });
 });
+
+app.delete('/delete/:id', (req, res) => {
+    console.log(98);
+    const {id} = req.params;
+    TodoModel.findByIdAndDelete({_id: id})
+    .then(result => {res.json(result);
+    })
+    .catch(err => res.json(err))
+})
 
 app.post('/add', (req, res, next) => {
     const task = req.body.task;
