@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const TodoModel = require('./models/Todo.js');
 
-
 PORT = process.env.PORT;
 Mongo_PORT = process.env.Mongo_PORT;
 
@@ -11,9 +10,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/test', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+mongoose.connect(`mongodb://127.0.0.1:27017/test`, {
 }).then(result => {
     console.log('Task connected:'); // Log the created task
 }).catch(err => {

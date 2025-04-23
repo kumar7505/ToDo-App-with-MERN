@@ -10,10 +10,11 @@ const Create = () => {
       handleAdd();
   };
 
-  const PORT = 3001;
+  const REACT_APP_API_PORT = import.meta.env.VITE_REACT_APP_API_PORT;
+
   const [task, setTask] = useState('');
   const handleAdd = () => {
-    axios.post(`http://127.0.0.1:${PORT}/add`, {task: document.getElementById('taskInput').value})
+    axios.post(`http://127.0.0.1:${REACT_APP_API_PORT}/add`, {task: document.getElementById('taskInput').value})
       .then(result => {
         location.reload();
       })
